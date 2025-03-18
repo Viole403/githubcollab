@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Webinar GIT | Collaboration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Webinar GIT | Collaboration" />
+    <meta name="keywords" content="webinar, git, collaboration, hima_unnar, fasilkom_narotama" />
+    <meta content="Author" name="Masalief Maulana" />
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+    <section class="team-9 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="text-center">
+                        <h2 class="">Webinar GIT - Collaboration</h2>
+                        <p class="lh-base text-muted">
+                            Ini adalah contoh aplikasi web sederhana yang menampilkan daftar pengguna dari file JSON. Dimana file JSON tersebut berisi data pengguna yang akan ditampilkan berdasarkan hasil dari fetch data yang akan dilakukan dari hasil push ke repository.
+                        </p>
+                    </div>
+                </div>
+                </div>
+            <div class="row mt-4" id="user-list">
+                </div>
+
+        </section>
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        async function fetchUsers() {
+            try {
+                const response = await fetch('users.json'); // Assuming users.json is in the same directory
+                const users = await response.json();
+                displayUsers(users);
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        }
+
+        function displayUsers(users) {
+            const userList = document.getElementById('user-list');
+            userList.innerHTML = ''; // Clear existing content
+
+            users.forEach(user => {
+                const userDiv = document.createElement('div');
+                userDiv.className = 'col-md-4';
+                userDiv.innerHTML = `
+                    <div class="d-flex align-items-center mt-4 pt-3">
+                        <div class="avatar-md">
+                            <span class="avatar-title">
+                                <img src="${user.image}" class="avatar-md rounded" alt="${user.name}">
+                            </span>
+                        </div>
+                        <div class="flex-1 ms-4">
+                            <h5 class="text-primary mb-0">${user.name}</h5>
+                            <p class="text-muted mb-0">${user.title}</p>
+                        </div>
+                    </div>
+                `;
+                userList.appendChild(userDiv);
+            });
+        }
+
+        fetchUsers();
+    </script>
+</body>
+
+</html>
